@@ -1,46 +1,37 @@
 import React, { useState } from "react";
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState({
-    background: "bg-white",
-    text: "text-gray-800",
-  });
-
-  const [btnState, setBtnState] = useState("Enable Dark Mode 🌙");
-
-  const toggleTheme = () => {
-    if (theme.background === "bg-white") {
-      setTheme({
-        background: "bg-gray-900",
-        text: "text-white",
-      });
-      setBtnState("Disable Dark Mode ☀️");
-    } else {
-      setTheme({
-        background: "bg-white",
-        text: "text-gray-800",
-      });
-      setBtnState("Enable Dark Mode 🌙");
-    }
-  };
+  const [dark, setDark] = useState(false);
 
   return (
     <div
-      className={`w-full h-screen flex flex-col justify-center items-center transition-all duration-500 ${theme.background} ${theme.text}`}
+      className={`w-full h-screen flex flex-col justify-center items-center transition-all duration-700 ${
+        dark
+          ? "bg-gray-900 text-white"
+          : "bg-gradient-to-r from-pink-100 via-blue-100 to-purple-100 text-gray-800"
+      }`}
     >
       {/* Title */}
-      <h1 className="text-3xl font-bold mb-6">Theme Toggle App</h1>
+      <h1 className="text-4xl font-extrabold mb-6 tracking-wide">
+        🌙 Theme Toggle App
+      </h1>
 
       {/* Button */}
       <button
-        onClick={toggleTheme}
-        className="px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-full shadow-lg transition-all duration-300"
+        onClick={() => setDark(!dark)}
+        className={`px-8 py-3 rounded-full font-semibold shadow-xl transition-all duration-300 transform hover:scale-105 ${
+          dark
+            ? "bg-white text-black hover:bg-gray-200"
+            : "bg-black text-white hover:bg-gray-800"
+        }`}
       >
-        {btnState}
+        Switch to {dark ? "Light Mode ☀️" : "Dark Mode 🌙"}
       </button>
 
-      {/* Footer text */}
-      <p className="mt-5 text-sm opacity-70">Built with React + Tailwind CSS</p>
+      {/* Footer */}
+      <p className="mt-6 text-sm opacity-70">
+        Built with React ⚛️ + Tailwind CSS 🎨
+      </p>
     </div>
   );
 };
